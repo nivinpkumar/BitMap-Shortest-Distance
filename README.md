@@ -1,5 +1,5 @@
 # BitMap-Shortest-Distance
-A typescript implementation to find shortest distance between pixels 0 and 1
+A Node.js implementation to find shortest distance between pixels 0 and 1
 
 ## Setting up the application
 After clonning the repository, do `npm install`
