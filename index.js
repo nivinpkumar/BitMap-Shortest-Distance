@@ -19,21 +19,23 @@ var minDistMatrix = function(matrix,m,n) {
     }
     //all possible direcition that can be traversed
     let dir = [[-1,0],[1,0],[0,-1],[0,1]];
-    
+    //implementing BFS algorithm to find the minimum distance
     while (queue.length) {
+        //each iteration to get the value of row,column and distance
         let  [row,col,dist] = queue.shift();
-        
+        //update matrix if the value is greater than the distance
         if (matrix[row][col] > dist) {
             matrix[row][col] = dist;
         }
-        
-        dir.forEach(function(d) {
-            let next = [row + d[0], col + d[1], dist + 1];
-            if (next[0] > -1 && next[0] < m && next[1] > -1 && next[1] < n) {
+        //cheak all possible neighbor position
+        dir.forEach(function(val) {
+            let pixel = [row + val[0], col + val[1], dist + 1];
+            //check if the cordinate is valid
+            if (pixel[0] > -1 && pixel[0] < m && pixel[1] > -1 && pixel[1] < n) {
                 
-                if (matrix[next[0]][next[1]] === Infinity) {
-                    //console.log("index "+next);
-                    queue.push(next);
+                if (matrix[pixel[0]][pixel[1]] === Infinity) {
+                    //push to the queue
+                    queue.push(pixel);
                 }
             }
         });
@@ -58,6 +60,7 @@ function main(){
         dimensions = prompt().split(" ");
         m = parseInt(dimensions[0]);
         n = parseInt(dimensions[1]);
+
         let matrix = new Array(m);
         let resultantMatrix;
         //getting the user input matrix
@@ -70,6 +73,7 @@ function main(){
                 matrix[i][j] = parseInt(matrix[i][j]);
             }
         }
+
         if(matrix.length ===m){
             //checking if the matrix is valid
             for(let i=0;i<matrix.length;i++){
@@ -79,7 +83,8 @@ function main(){
                     continue;
                 }
             }
-        }else{
+        }
+        if((matrix.length ===m)&&(matrix[0].length ===n)){
             //compute the minimum distance from '1'
             resultantMatrix = minDistMatrix(matrix,m,n);
             //display the matrix
@@ -89,5 +94,4 @@ function main(){
         }
 
 }
-
 main();
